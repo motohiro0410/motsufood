@@ -91,6 +91,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     pg (1.4.2)
     psych (3.3.2)
     puma (4.3.12)
@@ -152,13 +154,14 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   listen (~> 3.2)
   net-smtp
-  pg (>= 0.18, < 2.0)
+  pg (>= 0.18)
   psych (~> 3.1)
   puma (~> 4.1)
   rails (~> 6.0.5, >= 6.0.5.1)
