@@ -8,7 +8,7 @@ import { Money } from "../components/pages/Money";
 import { Group } from "../components/pages/Group";
 import { Page404 } from "../components/pages/Page404";
 
-
+import { InputFoodExpence } from "../components/pages/InputFoodExpence";
 
 export const Router: FC = memo(() => {
   return (
@@ -27,6 +27,9 @@ export const Router: FC = memo(() => {
       </Route>
       <Route path="/group">
         <Group />
+      </Route>
+      <Route path="/input">
+        <InputFoodExpence />
       </Route>
       <Route path="*">
         <Page404 />

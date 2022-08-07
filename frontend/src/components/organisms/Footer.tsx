@@ -18,10 +18,10 @@ export const Footer: FC = memo(() => {
         showLabels
         sx={{bgcolor: grey[100], height: 70 }}
       >
-        <BottomNavigationAction label="ホーム" icon={<HomeRoundedIcon />} />
-        <BottomNavigationAction label="カレンダー" icon={<CalendarMonthRoundedIcon />} />
-        <BottomNavigationAction label="食費" icon={<PointOfSaleRoundedIcon />} />
-        <BottomNavigationAction label="グループ" icon={<PersonAddRoundedIcon />} />
+        <BottomNavigationAction href="/home" label="ホーム" icon={<HomeRoundedIcon />} />
+        <BottomNavigationAction href="/calender" label="カレンダー" icon={<CalendarMonthRoundedIcon />} />
+        <BottomNavigationAction href="/money" label="食費" icon={<PointOfSaleRoundedIcon />} />
+        <BottomNavigationAction href="/group" label="グループ" icon={<PersonAddRoundedIcon />} />
       </BottomNavigation>
     </Box>
   );
