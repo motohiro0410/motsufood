@@ -10,16 +10,18 @@ import SendIcon from '@mui/icons-material/Send';
 
 
 export const InputFoodExpence: FC = memo(() => {
-  const [amount, setAmount] = useState("");
-  const [totalamount, setTotalamount] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [totalamount, setTotalamount] = useState(0);
 
-  const onChangeAmount= (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setAmount(e.target.value);
+  const onChangeAmount= (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setAmount(Number(e.target.value))
+  } ;
 
   const onClickSubmit = () => {
-    const newToatlAmount = totalamount + amount
-    return setTotalamount(newToatlAmount)
+    const newTotalAmount = totalamount + amount;
+    setTotalamount(newTotalAmount);
+    setAmount(0);
   }
-
 
   return (
     <Grid container direction="column" alignItems="center" mt={20}>
