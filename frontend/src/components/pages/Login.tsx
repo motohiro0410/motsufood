@@ -11,10 +11,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { Header } from "../organisms/Header";
-import styled from 'styled-components';
+import { MainHeader } from "../organisms/MainHeader";
 
 function Copyright(props: any) {
   return (
@@ -43,7 +42,7 @@ export const Login = () => {
 
   return (
     <>
-    <Header />  
+    <MainHeader />  
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box

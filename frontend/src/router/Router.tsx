@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { Login } from "../components/pages/Login";
 import { Home } from "../components/pages/Home";
-import { Calender } from "../components/pages/Calender";
+import { UserEditModal } from "../components/pages/UserEditModal";
 import { Money } from "../components/pages/Money";
 import { Group } from "../components/pages/Group";
 import { Page404 } from "../components/pages/Page404";
@@ -19,8 +19,8 @@ export const Router: FC = memo(() => {
       <Route path="/home">
         <Home />
       </Route>
-      <Route path="/calender">
-        <Calender />
+      <Route path="/userEditModal">
+        <UserEditModal />
       </Route>
       <Route path="/money">
         <Money />

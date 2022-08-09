@@ -1,14 +1,14 @@
 import { FC, memo } from "react";
 
 import { Footer } from "../organisms/Footer";
-import { Header } from "../organisms/Header";
+import { MainHeader } from "../organisms/MainHeader";
 import { Grid, Typography, Card } from "@mui/material"
 
 export const Money: FC = memo(() => {
 
   return (
     <>
-      <Header />
+      <MainHeader />
         <Grid container direction="column" alignItems="center" mt={20}>
           <Grid item mb={5}>
             <Typography variant="h4">
