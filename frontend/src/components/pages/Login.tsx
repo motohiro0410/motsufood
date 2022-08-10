@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { MainHeader } from "../organisms/MainHeader";
+// import { MainHeader } from "../organisms/MainHeader";
 
 function Copyright(props: any) {
   return (
@@ -42,7 +42,7 @@ export const Login = () => {
 
   return (
     <>
-    <MainHeader />  
+
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box

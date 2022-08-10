@@ -1,31 +1,32 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import IconBuuton from '@mui/material/IconButton';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-// import { Money } from '../pages/Money'
-
-type Context = {
-  title: string;
-  handleOpen: () => void;
+type Props = {
+  handleOpen: () => void
 }
 
-export const MainHeader: FC<Context> = (props) => {
-
-  const { title, handleOpen } = props;
+export const GroupHeader: FC<Props> = memo((props) => {
+  const { handleOpen } = props;
 
   return (
     <Box>
-      <AppBar position="static" >
+      <AppBar position="static"  >
         <Toolbar>
+        <IconBuuton>
+            <AddCircleOutlineIcon fontSize="large" />
+          </IconBuuton>
           <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-            {title}
+            メンバー一覧
           </Typography>
-            <IconButton
+          <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -39,4 +40,4 @@ export const MainHeader: FC<Context> = (props) => {
       </AppBar>
     </Box>
   )
-}
+})

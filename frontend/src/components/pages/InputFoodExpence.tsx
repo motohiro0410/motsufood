@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from "react";
+import React, { FC, memo, useState, useContext } from "react";
 
 import { Grid } from "@mui/material"
 import InputLabel from '@mui/material/InputLabel';
@@ -12,11 +12,19 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-
-import { InputFoodExpenceHeader } from "../organisms/InputFoodExpenceHeader";
+import { Footer } from '../organisms/Footer';
+import { MainHeader } from "../organisms/MainHeader";
+import { HeaderContext } from '../../providers/HeaderProvider';
+import { UserDetailModal } from "../organisms/UserDetailModal";
 
 
 export const InputFoodExpence: FC = memo(() => {
+  // モーダルの開閉
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const contexts = useContext(HeaderContext);
   const [value, setValue] = useState<Date | null>(new Date());
 
   const [amount, setAmount] = useState(0);
@@ -34,9 +42,9 @@ export const InputFoodExpence: FC = memo(() => {
 
   return (
     <>
-      <InputFoodExpenceHeader />
+      <MainHeader title={contexts[1].title} handleOpen={handleOpen} />
 
-      <Grid container direction="column" alignItems="center" mt={45}>  
+      <Grid container direction="column" alignItems="center" mt={30}>  
         <Grid item >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -67,7 +75,9 @@ export const InputFoodExpence: FC = memo(() => {
               送信
             </Button>
           </Grid>
-      </Grid>
+        </Grid>
+      <Footer />
+      <UserDetailModal open={open} handleClose={handleClose} />
     </>
     
   )

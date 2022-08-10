@@ -1,14 +1,22 @@
-import { FC, memo } from "react";
+import { FC, memo, useContext, useState } from "react";
 
 import { Footer } from "../organisms/Footer";
 import { MainHeader } from "../organisms/MainHeader";
-import { Grid, Typography, Card } from "@mui/material"
+import { Grid, Typography, Card } from "@mui/material";
+import { HeaderContext } from '../../providers/HeaderProvider';
+import { UserDetailModal } from "../organisms/UserDetailModal";
+
 
 export const Money: FC = memo(() => {
+  const contexts = useContext(HeaderContext);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
-      <MainHeader />
+      <MainHeader title={contexts[2].title} handleOpen={handleOpen} />
         <Grid container direction="column" alignItems="center" mt={20}>
           <Grid item mb={5}>
             <Typography variant="h4">
@@ -54,6 +62,9 @@ export const Money: FC = memo(() => {
             </Grid>
           </Grid>
         </Grid>
+      {/* モーダル */}
+      <UserDetailModal open={open} handleClose={handleClose} />
+
       <Footer />
     </>
     
