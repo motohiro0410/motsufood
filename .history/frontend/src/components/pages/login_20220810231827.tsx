@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -30,6 +30,8 @@ function Copyright(props: any) {
   );
 }
 
+
+
 export const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,12 +41,13 @@ export const Login = () => {
       password: data.get('password'),
     });
   };
-  // ヘッダーボタンの出しわけ
-  const [login, setLogin] = useState(true);
+
+  const history = useHistory();
+  const onClickSignIn = () => history.push("/signIn")
 
   return (
     <>
-      <SignInHeader login={login}/>  
+    <SignInHeader onClickSignIn={onClickSignIn}/>  
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box

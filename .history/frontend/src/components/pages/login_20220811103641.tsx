@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -39,12 +39,13 @@ export const Login = () => {
       password: data.get('password'),
     });
   };
-  // ヘッダーボタンの出しわけ
-  const [login, setLogin] = useState(true);
+
+  const history = useHistory();
+  const onClickSignIn = () => history.push("/signIn")
 
   return (
     <>
-      <SignInHeader login={login}/>  
+      <SignInHeader onClick={onClickSignIn}/>  
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box

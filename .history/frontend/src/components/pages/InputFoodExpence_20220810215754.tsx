@@ -25,7 +25,6 @@ export const InputFoodExpence: FC = memo(() => {
   const handleClose = () => setOpen(false);
 
   const contexts = useContext(HeaderContext);
-  
   const [value, setValue] = useState<Date | null>(new Date());
 
   const [amount, setAmount] = useState(0);

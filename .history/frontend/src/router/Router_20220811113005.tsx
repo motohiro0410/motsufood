@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { Login } from "../components/pages/Login";
-import { NotEatingCount } from "../components/pages/notEatingCount";
+import { Home } from "../components/pages/Home";
 import { Money } from "../components/pages/Money";
 import { Group } from "../components/pages/Group";
 import { SignIn } from "../components/pages/SignIn";
@@ -16,8 +16,8 @@ export const Router: FC = memo(() => {
       <Route exact path="/">
         <Login />
       </Route>
-      <Route path="/noteatingcount">
-        <NotEatingCount />
+      <Route path="/home">
+        <Home />
       </Route>
       <Route path="/money">
         <Money />

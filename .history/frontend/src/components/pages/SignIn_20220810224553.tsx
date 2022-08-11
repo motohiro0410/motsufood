@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,7 +16,6 @@ import Container from '@mui/material/Container';
 import { SignInHeader } from '../organisms/SignInHeader';
 
 function Copyright(props: any) {
-
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -30,7 +28,9 @@ function Copyright(props: any) {
   );
 }
 
-export const Login = () => {
+
+
+export const SignIn = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,12 +39,10 @@ export const Login = () => {
       password: data.get('password'),
     });
   };
-  // ヘッダーボタンの出しわけ
-  const [login, setLogin] = useState(true);
 
   return (
     <>
-      <SignInHeader login={login}/>  
+    <SignInHeader />  
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box

@@ -21,7 +21,7 @@ export const Footer: FC = memo(() => {
         <BottomNavigationAction href="/NotEatingCount" label="カウント" icon={<AddBoxIcon />} />
         <BottomNavigationAction href="/input" label="入力" icon={<ModeEditRoundedIcon />} />
         <BottomNavigationAction href="/money" label="食費" icon={<PointOfSaleRoundedIcon />} />
-        <BottomNavigationAction href="/group" label="メンバー" icon={<PersonAddRoundedIcon />} />
+        <BottomNavigationAction href="/group" label="グループ" icon={<PersonAddRoundedIcon />} />
       </BottomNavigation>
     </Box>
   );

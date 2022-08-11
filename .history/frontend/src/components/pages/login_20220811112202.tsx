@@ -39,7 +39,6 @@ export const Login = () => {
       password: data.get('password'),
     });
   };
-  // ヘッダーボタンの出しわけ
   const [login, setLogin] = useState(true);
 
   return (

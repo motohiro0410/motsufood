@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,6 +28,8 @@ function Copyright(props: any) {
   );
 }
 
+
+
 export const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,12 +39,10 @@ export const Login = () => {
       password: data.get('password'),
     });
   };
-  // ヘッダーボタンの出しわけ
-  const [login, setLogin] = useState(true);
 
   return (
     <>
-      <SignInHeader login={login}/>  
+    <SignInHeader />  
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
