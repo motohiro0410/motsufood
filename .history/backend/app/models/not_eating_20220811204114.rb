@@ -1,0 +1,2 @@
+class NotEating < ApplicationRecord
+end
