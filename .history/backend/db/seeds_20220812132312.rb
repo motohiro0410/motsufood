@@ -15,6 +15,3 @@ Money.create!(payment: 1500,
 
 Money.create!(payment: 1000,
               user_id: 2)
-
-NotEating.create!(not_eating_count: 3,
-                  user_id: 1)
