@@ -16,9 +16,6 @@ export const Router: FC = memo(() => {
       <Route exact path="/">
         <Login />
       </Route>
-      <Route path="/signin">
-        <SignIn />
-      </Route>
       <Route path="/count/:userId">
         <Count />
       </Route>
@@ -28,8 +25,11 @@ export const Router: FC = memo(() => {
       <Route path="/users">
         <Users />
       </Route>
-      <Route path="/input/:userId">
+      <Route path="/input">
         <InputFoodExpence />
+      </Route>
+      <Route path="/signin">
+        <SignIn />
       </Route>
       <Route path="*">
         <Page404 />

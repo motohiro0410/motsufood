@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { Login } from "../components/pages/Login";
 import { Count } from "../components/pages/Count";
 import { Money } from "../components/pages/Money";
-import { Users } from "../components/pages/Users";
+import { Group } from "../components/pages/Group";
 import { SignIn } from "../components/pages/SignIn";
 import { Page404 } from "../components/pages/Page404";
 
@@ -16,20 +16,20 @@ export const Router: FC = memo(() => {
       <Route exact path="/">
         <Login />
       </Route>
-      <Route path="/signin">
-        <SignIn />
-      </Route>
-      <Route path="/count/:userId">
+      <Route path="/count">
         <Count />
       </Route>
-      <Route path="/money/:userId">
+      <Route path="/money">
         <Money />
       </Route>
-      <Route path="/users">
-        <Users />
+      <Route path="/group">
+        <Group />
       </Route>
-      <Route path="/input/:userId">
+      <Route path="/input">
         <InputFoodExpence />
+      </Route>
+      <Route path="/signin">
+        <SignIn />
       </Route>
       <Route path="*">
         <Page404 />

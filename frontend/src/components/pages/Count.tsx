@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import { HeaderContext } from '../../providers/HeaderProvider';
 import { UserDetailModal } from "../organisms/UserDetailModal";
 
-export const NotEatingCount: FC = memo(() => {
+export const Count: FC = memo(() => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
