@@ -1,5 +1,4 @@
 import { FC, memo, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
 
 import { Footer } from "../organisms/Footer";
 import { MainHeader } from "../organisms/MainHeader";
@@ -9,19 +8,22 @@ import Button from '@mui/material/Button';
 import { HeaderContext } from '../../providers/HeaderProvider';
 import { UserDetailModal } from "../organisms/UserDetailModal";
 
+type Props ={
+  userId: string
+}
 
-export const Count: FC = memo(() => {
+export const Count: FC<Props> = memo((props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userId = useParams<number>();
+  const { match } = props;
 
   const contexts = useContext(HeaderContext);
 
   return (
     <>
-      <MainHeader title={contexts[0].title} handleOpen={handleOpen} userId={userId}/>
+      <MainHeader title={contexts[0].title} handleOpen={handleOpen} match={match} />
         <Grid  alignItems="center" sx={{ mt: 30, ml: 20 }} >
           <Grid item>
             <Button variant="contained" sx={{ bgcolor: '#81da7f', color: "white", fontSize: '30px', width: 200, height: 150 }}>user1</Button>

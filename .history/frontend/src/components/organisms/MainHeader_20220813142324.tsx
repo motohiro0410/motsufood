@@ -15,7 +15,6 @@ type Context = {
   userId: number
 }
 
-
 export const MainHeader: FC<Context> = (props) => {
 
   const { title, handleOpen, userId } = props;
@@ -37,8 +36,7 @@ export const MainHeader: FC<Context> = (props) => {
             >
               <AccountCircle  />
             </IconButton>
-            <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-          </Typography>
+            <Button variant="text">{userId}</Button>
         </Toolbar>
       </AppBar>
     </Box>

@@ -15,7 +15,8 @@ export const Count: FC = memo(() => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userId = useParams<number>();
+  const { userId } = useParams();
+  console.log(userId)
 
   const contexts = useContext(HeaderContext);
 

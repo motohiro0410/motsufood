@@ -6,15 +6,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Button from '@mui/material/Button';
 
+// import { Money } from '../pages/Money'
 
 type Context = {
   title: string;
   handleOpen: () => void;
   userId: number
 }
-
 
 export const MainHeader: FC<Context> = (props) => {
 
@@ -37,8 +36,6 @@ export const MainHeader: FC<Context> = (props) => {
             >
               <AccountCircle  />
             </IconButton>
-            <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-          </Typography>
         </Toolbar>
       </AppBar>
     </Box>

@@ -35,10 +35,9 @@ export const MainHeader: FC<Context> = (props) => {
               color="inherit"
               onClick={handleOpen}
             >
+              <Button variant="text">{userId}</Button>
               <AccountCircle  />
             </IconButton>
-            <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-          </Typography>
         </Toolbar>
       </AppBar>
     </Box>

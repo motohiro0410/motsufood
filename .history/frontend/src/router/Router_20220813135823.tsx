@@ -22,13 +22,13 @@ export const Router: FC = memo(() => {
       <Route path="/users/:userId/count">
         <Count />
       </Route>
-      <Route path="/users/:userId/money">
+      <Route path="/money">
         <Money />
       </Route>
       <Route path="/users">
         <Users />
       </Route>
-      <Route path="/users/:userId/input">
+      <Route path="/input">
         <InputFoodExpence /> 
       </Route>
       <Route path="*">

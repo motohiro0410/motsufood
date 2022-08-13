@@ -1,6 +1,4 @@
 import { FC, memo, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
-
 
 import { Footer } from "../organisms/Footer";
 import { MainHeader } from "../organisms/MainHeader";
@@ -12,15 +10,13 @@ import { UserDetailModal } from "../organisms/UserDetailModal";
 export const Money: FC = memo(() => {
   const contexts = useContext(HeaderContext);
 
-  const userId = useParams<number>();
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <>
-      <MainHeader title={contexts[2].title} handleOpen={handleOpen} userId={userId} />
+      <MainHeader title={contexts[2].title} handleOpen={handleOpen} />
         <Grid container direction="column" alignItems="center" mt={20}>
           <Grid item mb={5}>
             <Typography variant="h4">

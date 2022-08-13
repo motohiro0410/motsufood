@@ -19,17 +19,27 @@ export const Router: FC = memo(() => {
       <Route path="/signin">
         <SignIn />
       </Route>
-      <Route path="/users/:userId/count">
-        <Count />
+      <Route path="/user/:userId/count"
+        render = {({match}) =>
+        <Count match={match}/>
+        }
+      >
       </Route>
-      <Route path="/users/:userId/money">
-        <Money />
+      <Route path="/user/:userId/money"
+        render = {({match}) => 
+        <Money match={match}/>
+        }
+      >
+
       </Route>
       <Route path="/users">
         <Users />
       </Route>
-      <Route path="/users/:userId/input">
-        <InputFoodExpence /> 
+      <Route path="/user/:userId/input"
+        render = {({match}) => 
+        <InputFoodExpence match={match}/> 
+        }
+      >
       </Route>
       <Route path="*">
         <Page404 />

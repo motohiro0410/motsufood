@@ -18,10 +18,10 @@ export const Footer: FC = memo(() => {
         showLabels
         sx={{bgcolor: grey[100], height: 70 }}
       >
-        <BottomNavigationAction href="/users/100/Count" label="カウント" icon={<AddBoxIcon />} />
-        <BottomNavigationAction href="/users/100/input" label="入力" icon={<ModeEditRoundedIcon />} />
-        <BottomNavigationAction href="/users/100/money" label="食費" icon={<PointOfSaleRoundedIcon />} />
-        <BottomNavigationAction href="/users" label="メンバー" icon={<PersonAddRoundedIcon />} />
+        <BottomNavigationAction href="users/100/Count" label="カウント" icon={<AddBoxIcon />} />
+        <BottomNavigationAction href="/input" label="入力" icon={<ModeEditRoundedIcon />} />
+        <BottomNavigationAction href="/money" label="食費" icon={<PointOfSaleRoundedIcon />} />
+        <BottomNavigationAction href="/group" label="メンバー" icon={<PersonAddRoundedIcon />} />
       </BottomNavigation>
     </Box>
   );

@@ -14,7 +14,7 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ThemeProvider theme={theme}>
         <HeaderProvider>
-          <BrowserRouter>s
+         <BrowserRouter>
             <Router />
           </BrowserRouter>
         </HeaderProvider>

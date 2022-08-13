@@ -38,6 +38,7 @@ export const MainHeader: FC<Context> = (props) => {
               <AccountCircle  />
             </IconButton>
             <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

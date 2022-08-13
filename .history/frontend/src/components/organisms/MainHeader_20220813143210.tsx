@@ -19,6 +19,7 @@ type Context = {
 export const MainHeader: FC<Context> = (props) => {
 
   const { title, handleOpen, userId } = props;
+  console.log(userId);
 
   return (
     <Box>
@@ -37,8 +38,7 @@ export const MainHeader: FC<Context> = (props) => {
             >
               <AccountCircle  />
             </IconButton>
-            <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-          </Typography>
+            
         </Toolbar>
       </AppBar>
     </Box>
