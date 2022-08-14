@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { usersIndex } from '../urls/Url'
 
-export const fetchUsers = () => {
+export const getUsers = () => {
   return axios.get(usersIndex)
   .then(res => {
     return res.data
