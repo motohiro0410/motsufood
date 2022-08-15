@@ -18,7 +18,7 @@ export const useDleteUser = () => {
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState<User[]>([])
 
-  const deleteUser = useCallback((id: any) => {
+  const deleteUsers = useCallback((id: any) => {
     setLoading(true)
     axios.delete<User[]>(userDestroy(id))
       .then((res) => {
@@ -31,5 +31,5 @@ export const useDleteUser = () => {
       .finally(() => setLoading(false))
     }, [setUsers, setLoading]);
 
-    return { deleteUser, loading, users }
+    return { deleteUsers, loading, users }
 }

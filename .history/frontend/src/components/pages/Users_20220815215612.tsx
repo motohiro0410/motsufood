@@ -39,7 +39,7 @@ export const Users: FC = memo(() => {
                         {user.name}
                       </Typography>
                     </CardContent>
-                    <Button variant="text" size="small" onClick={deleteUser}>削除</Button>
+                    <Button variant="text" size="small" onClick={deleteUsers}>削除</Button>
                   </Stack>
                 </Card>
               </Grid> 

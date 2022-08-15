@@ -18,12 +18,13 @@ export const useDleteUser = () => {
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState<User[]>([])
 
-  const deleteUser = useCallback((id: any) => {
+  const deleteUsers = useCallback((id: any) => {
     setLoading(true)
     axios.delete<User[]>(userDestroy(id))
       .then((res) => {
-        res.data.splice(id, 1)
-        setUsers(res.data)
+        console.log(res.data)
+        // res.data.splice(userId, 1)
+        // setUsers(res.data)
       })
       // 本来はバリデーションエラーメッセージなどを表示
       .catch((e) => console.log(e)
@@ -31,5 +32,5 @@ export const useDleteUser = () => {
       .finally(() => setLoading(false))
     }, [setUsers, setLoading]);
 
-    return { deleteUser, loading, users }
+    return { deleteUsers, loading, users }
 }
