@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :money
+  has_many :money, dependent: :destroy
   has_one :not_eating
 
   validates :name, presence:true, length:{maximum:30}, uniqueness:true
