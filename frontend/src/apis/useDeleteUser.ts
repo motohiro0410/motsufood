@@ -1,35 +1,24 @@
 import axios from 'axios';
-import { useCallback, useState } from 'react'; 
+import { useState } from 'react'; 
 
 import { userDestroy } from '../urls/Url'
-
-export type User = {
-    id: number,
-    name: string,
-    email: string,
-    created_at: string,
-    update_at: string,
-    user_id: number
-  }
-
+import { User } from '../types/Types';
 
 export const useDleteUser = () => {
 
-  const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState<User[]>([])
+  const [user, setUser] = useState<User>({} as User)
 
-  const deleteUser = useCallback((id: any) => {
-    setLoading(true)
-    axios.delete<User[]>(userDestroy(id))
-      .then((res) => {
-        res.data.splice(id, 1)
-        setUsers(res.data)
+
+  const deleteUser = (id: number) => {
+    axios.get<User[]>(userDestroy(id))
+      .then(res => {
+        console.log(res.data)
       })
       // 本来はバリデーションエラーメッセージなどを表示
       .catch((e) => console.log(e)
       )
-      .finally(() => setLoading(false))
-    }, [setUsers, setLoading]);
+    };
 
-    return { deleteUser, loading, users }
+    return { deleteUser, users }
 }

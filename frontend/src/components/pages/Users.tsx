@@ -1,21 +1,23 @@
-import { FC, memo, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 
 import { GroupHeader } from "../organisms/GroupHeader";
 import { Footer } from "../organisms/Footer";
-import { Grid, Typography, Card, Stack, Avatar, CardContent, Button, CircularProgress, Box } from "@mui/material"
+import { Grid, Typography, Card, Stack, Avatar, CardContent, CircularProgress, Box, Button } from "@mui/material"
 import { UserDetailModal } from "../organisms/UserDetailModal";
 import { useAllUsers } from "../../apis/useAllUsers";
+import { useEditUser } from "../../apis/useEditUser";
 import { useDleteUser } from "../../apis/useDeleteUser";
 
-export const Users: FC = memo(() => {
+export const Users: FC = () => {
     // モーダルの開閉
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     // ユーザー一覧取得
     const { getUsers, loading, users } = useAllUsers();
     useEffect(() => getUsers(), [])
+    // ユーザー編集画面に遷移
+    const { MoveEditPage } = useEditUser();
     // ユーザー削除
     const { deleteUser } = useDleteUser();
 
@@ -39,8 +41,11 @@ export const Users: FC = memo(() => {
                         {user.name}
                       </Typography>
                     </CardContent>
-                    <Button variant="text" size="small" onClick={deleteUser}>削除</Button>
-                  </Stack>
+                    </Stack>
+                    <Stack direction="row">
+                      <Button onClick={() => MoveEditPage(user.id)}>編集</Button>
+                      <Button onClick={() => deleteUser(user.id)}>削除</Button>
+                    </Stack>
                 </Card>
               </Grid> 
             ))}
@@ -51,4 +56,4 @@ export const Users: FC = memo(() => {
       )}
     </>
   )
-})
+}

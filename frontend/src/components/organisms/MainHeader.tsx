@@ -11,13 +11,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 type Context = {
   title: string;
   handleOpen: () => void;
-  userId: number
 }
 
 
 export const MainHeader: FC<Context> = (props) => {
 
-  const { title, handleOpen, userId } = props;
+  const { title, handleOpen } = props;
 
   return (
     <Box>
@@ -37,7 +36,7 @@ export const MainHeader: FC<Context> = (props) => {
               <AccountCircle  />
             </IconButton>
             <Typography textAlign="center" variant="h6" component="div" sx={{ flexGrow: 1}}>
-          </Typography>
+            </Typography>
         </Toolbar>
       </AppBar>
     </Box>

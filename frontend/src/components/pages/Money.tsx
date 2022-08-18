@@ -20,7 +20,7 @@ export const Money: FC = memo(() => {
 
   return (
     <>
-      <MainHeader title={contexts[2].title} handleOpen={handleOpen} userId={userId} />
+      <MainHeader title={contexts[2].title} handleOpen={handleOpen} />
         <Grid container direction="column" alignItems="center" mt={20}>
           <Grid item mb={5}>
             <Typography variant="h4">

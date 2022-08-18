@@ -27,17 +27,20 @@ export const InputFoodExpence: FC = memo(() => {
 
   const userId = useParams<number>();
 
+  // ヘッダータイトルの変更
   const contexts = useContext(HeaderContext);
   
+  // 日付選択
   const [value, setValue] = useState<Date | null>(new Date());
 
+  // inputの入力値を取得
   const [amount, setAmount] = useState(0);
   const [totalamount, setTotalamount] = useState(0);
-
   const onChangeAmount= (e: React.ChangeEvent<HTMLInputElement>) =>{
     setAmount(Number(e.target.value))
   } ;
 
+  // 送信ボタンで値を送信
   const onClickSubmit = () => {
     const newTotalAmount = totalamount + amount;
     setTotalamount(newTotalAmount);
@@ -46,7 +49,7 @@ export const InputFoodExpence: FC = memo(() => {
 
   return (
     <>
-      <MainHeader title={contexts[1].title} handleOpen={handleOpen} userId={userId} />
+      <MainHeader title={contexts[1].title} handleOpen={handleOpen} />
 
       <Grid container direction="column" alignItems="center" mt={30}>  
         <Grid item >

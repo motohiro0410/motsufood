@@ -7,8 +7,8 @@ import { Money } from "../components/pages/Money";
 import { Users } from "../components/pages/Users";
 import { SignIn } from "../components/pages/SignIn";
 import { Page404 } from "../components/pages/Page404";
-
 import { InputFoodExpence } from "../components/pages/InputFoodExpence";
+import { UserEdit } from "../components/pages/UserEdit"
 
 export const Router: FC = memo(() => {
   return (
@@ -19,18 +19,23 @@ export const Router: FC = memo(() => {
       <Route path="/signin">
         <SignIn />
       </Route>
-      <Route path="/users/:userId/count">
-        <Count />
-      </Route>
-      <Route path="/users/:userId/money">
-        <Money />
-      </Route>
-      <Route path="/users/:userId/input">
-        <InputFoodExpence /> 
-      </Route>
-      <Route path="/users">
-        <Users />
-      </Route>
+      <Route path="/users"
+        render={({match})=>(
+          <Switch>
+            <Route exact path="/users" component={Users} />
+            <Route path="/users/:id/edit" component={UserEdit} />
+            <Route path="/users/:userId/count">
+              <Count />
+            </Route>
+            <Route path="/users/:userId/money">
+              <Money />
+            </Route>
+            <Route path="/users/:userId/input">
+              <InputFoodExpence /> 
+            </Route>
+          </Switch>
+        )}
+      />
       <Route path="*">
         <Page404 />
       </Route>
