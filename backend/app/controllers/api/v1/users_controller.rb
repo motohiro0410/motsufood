@@ -19,10 +19,10 @@ module Api
       def create
         # new(todo_params):new(params[:user]の代わりに使用→web経由でuser情報が外部に晒されないため)
         @user = User.new(user_params)
-        if @user.save
+        if @user.save!
           render json: @user
         else
-          render 'new'
+          render json: { error: "Failed to create" }, status: 422
         end
       end
 
@@ -36,7 +36,7 @@ module Api
 
       def destroy
         if @user.destroy
-          head :no_content
+          render json: @user
         else
           render json: { error: "Failed to destroy" }, status: 422
         end
@@ -49,7 +49,7 @@ module Api
       private
         # passwordも追加予定
         def user_params
-          params.require(:user).permit(:name, :email)
+          params.permit(:id, :name, :email, :password, :password_confirmation)
         end
     end
   end

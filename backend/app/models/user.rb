@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :money, dependent: :destroy
-  has_one :not_eating
+  has_one :not_eating, dependent: :destroy
 
   validates :name, presence:true, length:{maximum:30}, uniqueness:true
 
@@ -9,4 +9,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
 
   # 今後indexが必要になるかも
+
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
 end

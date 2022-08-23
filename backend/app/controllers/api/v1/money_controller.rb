@@ -2,6 +2,8 @@ module Api
   module V1
     class MoneyController < ApplicationController
 
+      before_action :set_user, only: [:create]
+
       def create
         @user = User.find(params[:id])
         @money = @user.money.build
@@ -10,6 +12,10 @@ module Api
         else
           render json: @money.errors, status: 422
       end
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
   end
 end
