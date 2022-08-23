@@ -12,11 +12,13 @@ import { UserDetailModal } from "../organisms/UserDetailModal";
 export const Money: FC = memo(() => {
   const contexts = useContext(HeaderContext);
 
-  const userId = useParams<number>();
+  // const userId = useParams<number>();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // useEffectで合計金額と分配金額の計算
 
   return (
     <>

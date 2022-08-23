@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { Login } from "../components/pages/Login";
@@ -7,10 +7,10 @@ import { Money } from "../components/pages/Money";
 import { Users } from "../components/pages/Users";
 import { SignIn } from "../components/pages/SignIn";
 import { Page404 } from "../components/pages/Page404";
-import { InputFoodExpence } from "../components/pages/InputFoodExpence";
 import { UserEdit } from "../components/pages/UserEdit"
+import { InputFoodExpence } from "../components/pages/InputFoodExpence"
 
-export const Router: FC = memo(() => {
+export const Router: FC = () => {
   return (
     <Switch>
       <Route exact path="/">
@@ -24,15 +24,9 @@ export const Router: FC = memo(() => {
           <Switch>
             <Route exact path="/users" component={Users} />
             <Route path="/users/:id/edit" component={UserEdit} />
-            <Route path="/users/:userId/count">
-              <Count />
-            </Route>
-            <Route path="/users/:userId/money">
-              <Money />
-            </Route>
-            <Route path="/users/:userId/input">
-              <InputFoodExpence /> 
-            </Route>
+            <Route path="/users/:userId/count" component={Count} />
+            <Route path="/users/:userId/money" component={Money} />
+            <Route path="/users/:userId/input" component={InputFoodExpence} />
           </Switch>
         )}
       />
@@ -41,4 +35,4 @@ export const Router: FC = memo(() => {
       </Route>
     </Switch>
   )
-})
+}

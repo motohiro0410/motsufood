@@ -1,16 +1,15 @@
 import { useContext, useState, FC } from "react"
-import { RouteComponentProps } from 'react-router-dom';
+import {RouteComponentProps} from 'react-router-dom'
 
-import { TextField, Button, Stack } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import Box from '@mui/material/Box';
 import { HeaderContext } from '../../providers/HeaderProvider';
 import { MainHeader } from '../organisms/MainHeader';
+import { useUpdateUser } from '../../apis/useUpdateUser'
 
-type UserProps = RouteComponentProps<{
-  id: string;
- }>;
+type PageProps = {} & RouteComponentProps<{id: string}>;
 
-export const UserEdit: FC<UserProps> = ({match}) => {
+export const UserEdit: FC<PageProps> = ({match}) => {
 
     // ヘッダータイトルの変更
     const contexts = useContext(HeaderContext);
@@ -18,8 +17,8 @@ export const UserEdit: FC<UserProps> = ({match}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
 
-    const id = match.params.id;
-    console.log(id);
+    // ユーザー編集
+    const { updateUser, user } = useUpdateUser()  
   
     return (
       <>
@@ -65,15 +64,14 @@ export const UserEdit: FC<UserProps> = ({match}) => {
                 autoComplete="comfirmation"
               />
             </Box>
-              <Stack direction="row">
                 <Button
                   type="submit"
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={()=>updateUser(match.params.id)}
                 >
                   更新
                 </Button>
-              </Stack>
     </>
     )
 }

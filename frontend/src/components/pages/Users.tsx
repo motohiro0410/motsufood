@@ -16,10 +16,11 @@ export const Users: FC = () => {
     // ユーザー一覧取得
     const { getUsers, loading, users } = useAllUsers();
     useEffect(() => getUsers(), [])
+
     // ユーザー編集画面に遷移
     const { MoveEditPage } = useEditUser();
     // ユーザー削除
-    const { deleteUser } = useDleteUser();
+    const { deleteUser } = useDleteUser(getUsers);
 
   return (
     <>

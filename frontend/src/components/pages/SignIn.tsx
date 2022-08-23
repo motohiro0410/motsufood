@@ -1,17 +1,30 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import { SignInHeader } from '../organisms/SignInHeader';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { userCreate } from '../../urls/Url'
+import { User } from '../../types/Types'
 
+const iniData: User = {
+  id: "",
+  name: "",
+  email: "",
+  password: "",
+  passwordConfirmation: "",
+}
 
 function Copyright(props: any) {
   return (
@@ -28,17 +41,40 @@ function Copyright(props: any) {
 
 export const SignIn = () => {
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
   // ヘッダーボタンの出しわけ
   const [login, setLogin] = useState(false);
+
+  // 複数のinputの値取得
+  const [user, setUser] = useState<User>(iniData)
+  const onChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target
+    console.log(value)
+    setUser({...user, [name]: value})
+  }
+  // 取得データの送信
+    const history = useHistory();
+  const sendFormData = () => {
+    const data = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      passwordConfirmation: user.passwordConfirmation,
+    }
+    axios.post(userCreate, data)
+      .then(res => {
+        setUser({
+          id: res.data.id,
+          name: res.data.name,
+          email: res.data.email,
+          password: res.data.password,
+          passwordConfirmation: res.data.passwordConfirmation,
+        })
+        history.push("/users")
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
 
   return (
       <>    
@@ -59,8 +95,71 @@ export const SignIn = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField
+            <Stack component="form" width="100%" noValidate spacing={4} >
+              <FormControl fullWidth sx={{mt: 5}}>
+                <InputLabel htmlFor="outlined-adornment-amount">name</InputLabel>
+                <OutlinedInput
+                  id="user-name"
+                  label="name"
+                  name='name'
+                  value={user.name}
+                  onChange={onChangeUser}
+                  type="string"
+                />
+              </FormControl>
+              <FormControl fullWidth sx={{ m: 5 }}>
+                <InputLabel htmlFor="outlined-adornment-amount">email</InputLabel>
+                <OutlinedInput
+                  id="user-email"
+                  label="email"
+                  name="email"
+                  value={user.email}
+                  onChange={onChangeUser}
+                  type="string"
+                />
+              </FormControl>
+              <FormControl fullWidth sx={{ m: 5 }}>
+                <InputLabel htmlFor="outlined-adornment-amount">password</InputLabel>
+                <OutlinedInput
+                  id="user-password"
+                  autoComplete='true'
+                  label="password"
+                  name="password"
+                  value={user.password}
+                  onChange={onChangeUser}
+                  type="password"
+                />
+              </FormControl>
+              <FormControl fullWidth sx={{ m: 5 }}>
+                <InputLabel htmlFor="outlined-adornment-amount">confirmation</InputLabel>
+                <OutlinedInput
+                  id="user-passwordConfirmation"
+                  autoComplete='true'
+                  label="passwordConfirmation"
+                  name="passwordConfirmation"
+                  value={user.passwordConfirmation}
+                  onChange={onChangeUser}
+                  type="password"
+                />
+              </FormControl>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={sendFormData} 
+              >
+                sign In
+              </Button>
+            </Stack>
+          </Box>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+     </>
+  );
+  
+
+              {/* <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -69,48 +168,5 @@ export const SignIn = () => {
                 name="name"
                 autoComplete="name"
                 autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="email"
-                label="email"
-                type="email"
-                id="email"
-                autoComplete="email"
-              />
-                <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="password"
-                label="password"
-                name="password"
-                autoComplete="password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="comfirmation"
-                label="comfirmation"
-                type="comfirmation"
-                id="comfirmation"
-                autoComplete="comfirmation"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                sign In
-              </Button>
-            </Box>
-          </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Container>
-     </>
-  );
+              /> */}
 }
