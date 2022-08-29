@@ -5,10 +5,11 @@ import { Login } from "../components/pages/Login";
 import { Count } from "../components/pages/Count";
 import { Money } from "../components/pages/Money";
 import { Users } from "../components/pages/Users";
-import { SignIn } from "../components/pages/SignIn";
+import { SignIn2 } from "../components/pages/SignIn2";
 import { Page404 } from "../components/pages/Page404";
 import { UserEdit } from "../components/pages/UserEdit"
 import { InputFoodExpence } from "../components/pages/InputFoodExpence"
+import { SignUp } from "../components/pages/SignUp";
 
 export const Router: FC = () => {
   return (
@@ -17,7 +18,10 @@ export const Router: FC = () => {
         <Login />
       </Route>
       <Route path="/signin">
-        <SignIn />
+        <SignIn2 />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
       </Route>
       <Route path="/users"
         render={({match})=>(

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -12,9 +13,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { SignInHeader } from '../organisms/SignInHeader';
+import { SignInHeader } from '../layouts/SignInHeader';
+import { User } from '../../types/Types';
 
 function Copyright(props: any) {
 
@@ -31,16 +31,37 @@ function Copyright(props: any) {
 }
 
 export const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
   // ヘッダーボタンの出しわけ
   const [login, setLogin] = useState(true);
+
+  const history = useHistory();
+  const [user, setUser] = useState<User>({} as User)
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch(`http://localhost:3000/api/v1/auto_login`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        setUser(data)
+        // console.log(data)
+      })
+    }
+  }, [])
+
+  const handleAuthClick = () => {
+    const token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/user_is_authed`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+  }
 
   return (
     <>
@@ -61,7 +82,7 @@ export const Login = () => {
             <Typography component="h1" variant="h5">
               Log in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -91,6 +112,7 @@ export const Login = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleAuthClick}
               >
                 Log In
               </Button>

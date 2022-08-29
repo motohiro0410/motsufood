@@ -1,9 +1,9 @@
 import { FC, useState, useEffect } from "react";
 
-import { GroupHeader } from "../organisms/GroupHeader";
-import { Footer } from "../organisms/Footer";
+import { GroupHeader } from "../layouts/GroupHeader";
+import { Footer } from "../layouts/Footer";
 import { Grid, Typography, Card, Stack, Avatar, CardContent, CircularProgress, Box, Button } from "@mui/material"
-import { UserDetailModal } from "../organisms/UserDetailModal";
+import { UserDetailModal } from "../layouts/UserDetailModal";
 import { useAllUsers } from "../../apis/useAllUsers";
 import { useEditUser } from "../../apis/useEditUser";
 import { useDleteUser } from "../../apis/useDeleteUser";
@@ -15,7 +15,7 @@ export const Users: FC = () => {
     const handleClose = () => setOpen(false);
     // ユーザー一覧取得
     const { getUsers, loading, users } = useAllUsers();
-    useEffect(() => getUsers(), [])
+    useEffect(() => getUsers(), [getUsers])
 
     // ユーザー編集画面に遷移
     const { MoveEditPage } = useEditUser();
