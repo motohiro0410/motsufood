@@ -9,33 +9,8 @@ import { AlertMessage } from "../layouts/AlertMessage"
 import { signIn } from "../../lib/api/auth"
 import { SignInParams } from "../../types/Types"
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   container: {
-//     marginTop: theme.spacing(6)
-//   },
-//   submitBtn: {
-//     marginTop: theme.spacing(2),
-//     flexGrow: 1,
-//     textTransform: "none"
-//   },
-//   header: {
-//     textAlign: "center"
-//   },
-//   card: {
-//     padding: theme.spacing(2),
-//     maxWidth: 400
-//   },
-//   box: {
-//     marginTop: "2rem"
-//   },
-//   link: {
-//     textDecoration: "none"
-//   }
-// }))
-
 // サインイン用ページ
 export const SignIn2: React.FC = () => {
-  // const classes = useStyles()
   const history = useHistory()
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
@@ -65,7 +40,7 @@ export const SignIn2: React.FC = () => {
         setIsSignedIn(true)
         setCurrentUser(res.data.data)
 
-        history.push("/")
+        history.push("/users")
 
         console.log("Signed in successfully!")
       } else {
@@ -90,7 +65,7 @@ export const SignIn2: React.FC = () => {
               label="Email"
               value={email}
               margin="dense"
-              onChange={event => setEmail(event.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -102,14 +77,14 @@ export const SignIn2: React.FC = () => {
               value={password}
               margin="dense"
               autoComplete="current-password"
-              onChange={event => setPassword(event.target.value)}
+              onChange={e => setPassword(e.target.value)}
             />
             <Button
               type="submit"
               variant="contained"
               size="large"
               fullWidth
-              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せないように
+              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せない
               onClick={handleSubmit}
             >
               Submit

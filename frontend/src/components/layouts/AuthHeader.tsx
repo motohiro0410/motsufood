@@ -2,30 +2,16 @@ import React, { useContext } from "react"
 import { useHistory, Link } from "react-router-dom"
 import Cookies from "js-cookie"
 
-import { Typography, Toolbar, AppBar, Button, IconButton } from '@mui/material';
+import { Toolbar, AppBar, Button, IconButton } from '@mui/material';
 
 import { signOut } from "../../lib/api/auth"
 import { AuthContext } from "../pages/Home"
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   iconButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   title: {
-//     flexGrow: 1,
-//     textDecoration: "none",
-//     color: "inherit"
-//   },
-//   linkBtn: {
-//     textTransform: "none"
-//   }
-// }))
-
 export const AuthHeader: React.FC = () => {
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext)
-  // const classes = useStyles()
   const histroy = useHistory()
 
+  // サインアウトボタンの処理
   const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const res = await signOut()
@@ -95,19 +81,9 @@ export const AuthHeader: React.FC = () => {
         <Toolbar>
           <IconButton
             edge="start"
-            // className={classes.iconButton}
             color="inherit"
           >
-            {/* <MenuIcon /> */}
           </IconButton>
-          <Typography
-            component={Link}
-            to="/"
-            variant="h6"
-            // className={classes.title}
-          >
-            Sample
-          </Typography>
           <AuthButtons />
         </Toolbar>
       </AppBar>

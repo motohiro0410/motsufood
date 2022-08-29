@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react"
+import { useState, useContext } from "react"
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie"
 
-// import { makeStyles, Theme } from "@material-ui/core/styles"
 import { TextField, Card, CardContent, CardHeader, Button } from "@mui/material"
 
 import { AuthContext } from "../pages/Home"
@@ -10,27 +9,8 @@ import { AlertMessage } from "../layouts/AlertMessage"
 import { signUp } from "../../lib/api/auth"
 import { SignUpParams } from "../../types/Types"
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   container: {
-//     marginTop: theme.spacing(6)
-//   },
-//   submitBtn: {
-//     marginTop: theme.spacing(2),
-//     flexGrow: 1,
-//     textTransform: "none"
-//   },
-//   header: {
-//     textAlign: "center"
-//   },
-//   card: {
-//     padding: theme.spacing(2),
-//     maxWidth: 400
-//   }
-// }))
-
 // サインアップ用ページ
 export const SignUp: React.FC = () => {
-  // const classes = useStyles()
   const histroy = useHistory()
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
@@ -57,7 +37,7 @@ export const SignUp: React.FC = () => {
 
       if (res.status === 200) {
         // アカウント作成と同時にログインさせてしまう
-        // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
+        // 本来であればメール確認などを挟むべき
         Cookies.set("_access_token", res.headers["access-token"])
         Cookies.set("_client", res.headers["client"])
         Cookies.set("_uid", res.headers["uid"])
@@ -90,7 +70,7 @@ export const SignUp: React.FC = () => {
               label="Name"
               value={name}
               margin="dense"
-              onChange={event => setName(event.target.value)}
+              onChange={e => setName(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -99,7 +79,7 @@ export const SignUp: React.FC = () => {
               label="Email"
               value={email}
               margin="dense"
-              onChange={event => setEmail(event.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -110,7 +90,7 @@ export const SignUp: React.FC = () => {
               value={password}
               margin="dense"
               autoComplete="current-password"
-              onChange={event => setPassword(event.target.value)}
+              onChange={e => setPassword(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -121,14 +101,14 @@ export const SignUp: React.FC = () => {
               value={passwordConfirmation}
               margin="dense"
               autoComplete="current-password"
-              onChange={event => setPasswordConfirmation(event.target.value)}
+              onChange={e => setPasswordConfirmation(e.target.value)}
             />
             <Button
               type="submit"
               variant="contained"
               size="large"
               fullWidth
-              disabled={!name || !email || !password || !passwordConfirmation ? true : false}
+              disabled={!name || !email || !password || !passwordConfirmation ? true : false} // 空欄があった場合はボタンを押せない
               onClick={handleSubmit}
             >
               Submit

@@ -26,6 +26,7 @@ export const AuthContext = createContext({} as {
   setCurrentUser: React.Dispatch<React.SetStateAction<User | undefined>>
 })
 
+
 export const Router: FC = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
