@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { Count } from "../components/pages/Count";
 import { Money } from "../components/pages/Money";
 import { Users } from "../components/pages/Users";
-import { SignIn2 } from "../components/pages/SignIn2";
+import { SignIn } from "../components/pages/SignIn";
 import { Page404 } from "../components/pages/Page404";
 import { UserEdit } from "../components/pages/UserEdit"
 import { InputFoodExpence } from "../components/pages/InputFoodExpence"
@@ -78,7 +78,7 @@ export const Router: FC = () => {
         <CommonLayout>
           <Switch>
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/signin" component={SignIn2} />
+            <Route exact path="/signin" component={SignIn} />
             <Private>
             <Route path="/users"
               render={({match})=>(

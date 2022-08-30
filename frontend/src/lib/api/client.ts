@@ -9,8 +9,6 @@ const options = {
   ignoreHeaders: true 
 }
 
-const client = applyCaseMiddleware(axios.create({
-  baseURL: "http://localhost:3001/api/v1"
+export const client = applyCaseMiddleware(axios.create({
+  baseURL: "http://localhost:3000/api/v1"
 }), options)
-
-export default client

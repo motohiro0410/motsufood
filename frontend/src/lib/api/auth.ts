@@ -1,6 +1,6 @@
-import client from "./client"
 import Cookies from "js-cookie"
 
+import { client } from "./client"
 import { SignUpParams, SignInParams } from "../../types/Types"
 
 // サインアップ（新規アカウント作成）

@@ -19,7 +19,7 @@ export const Users: FC = () => {
     const handleClose = () => setOpen(false);
     // ユーザー一覧取得
     const { getUsers, loading, users } = useAllUsers();
-    useEffect(() => getUsers(), [getUsers])
+    useEffect(() => getUsers(), [])
 
     // ユーザー編集画面に遷移
     const { MoveEditPage } = useEditUser();
@@ -58,7 +58,6 @@ export const Users: FC = () => {
                     </Grid> 
                   ))}
                 </Grid>
-                <Footer />
                 <UserDetailModal open={open} handleClose={handleClose} />
             </>
           ) : (

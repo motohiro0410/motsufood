@@ -5,7 +5,7 @@ import Cookies from "js-cookie"
 import { Toolbar, AppBar, Button, IconButton } from '@mui/material';
 
 import { signOut } from "../../lib/api/auth"
-import { AuthContext } from "../pages/Home"
+import { AuthContext } from "../../router/Router";
 
 export const AuthHeader: React.FC = () => {
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext)

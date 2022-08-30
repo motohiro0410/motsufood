@@ -4,7 +4,7 @@ import Cookies from "js-cookie"
 
 import { TextField, Card, CardContent, CardHeader, Button } from "@mui/material"
 
-import { AuthContext } from "../pages/Home"
+import { AuthContext } from "../../router/Router";
 import { AlertMessage } from "../layouts/AlertMessage"
 import { signUp } from "../../lib/api/auth"
 import { SignUpParams } from "../../types/Types"
@@ -45,7 +45,7 @@ export const SignUp: React.FC = () => {
         setIsSignedIn(true)
         setCurrentUser(res.data.data)
 
-        histroy.push("/")
+        histroy.push("/users")
 
         console.log("Signed in successfully!")
       } else {

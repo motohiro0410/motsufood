@@ -1,162 +1,111 @@
-import { useState, FC } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useContext } from "react"
+import { useHistory, Link } from "react-router-dom"
+import Cookies from "js-cookie"
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-// import { SignInHeader } from '../layouts/SignInHeader';
-import { userCreate } from '../../urls/Url'
-import { User } from '../../types/Types'
+import { Typography, TextField, Card, CardContent, CardHeader, Button, Box } from "@mui/material"
 
-// const iniData: User = {
-//   id: "",
-//   username: "",
-//   email: "",
-//   password: "",
-//   passwordConfirmation: "",
-// }
+import { AuthContext } from "../../router/Router"
+import { AlertMessage } from "../layouts/AlertMessage"
+import { signIn } from "../../lib/api/auth"
+import { SignInParams } from "../../types/Types"
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+// サインイン用ページ
+export const SignIn: React.FC = () => {
+  const history = useHistory()
 
-export const SignIn = () => {
+  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
 
-  // // ヘッダーボタンの出しわけ
-  // const [login, setLogin] = useState(false);
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+  const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
 
-  
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
 
-  // // 複数のinputの値取得
-  // const [user, setUser] = useState<User>(iniData)
-  // const onChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const {name, value} = e.target
-  //   console.log(value)
-  //   setUser({...user, [name]: value})
-  // }
-  // // 取得データの送信
-  //   const history = useHistory();
-  // const sendFormData = () => {
-  //   const data = {
-  //     name: user.username,
-  //     email: user.email,
-  //     password: user.password,
-  //     passwordConfirmation: user.passwordConfirmation,
-  //   }
-  //   axios.post(userCreate, data)
-  //     .then(res => {
-  //       setUser({
-  //         id: res.data.id,
-  //         username: res.data.name,
-  //         email: res.data.email,
-  //         password: res.data.password,
-  //         passwordConfirmation: res.data.passwordConfirmation,
-  //       })
-  //       history.push("/users")
-  //     })
-  //     .catch(e => {
-  //       console.log(e)
-  //     })
-  // }
+    const params: SignInParams = {
+      email: email,
+      password: password
+    }
 
-  // return (
-  //     <>    
-  //       <SignInHeader login={login}/>
-  //       <Container component="main" maxWidth="xs">
-  //         <CssBaseline />
-  //         <Box
-  //           sx={{
-  //             marginTop: 8,
-  //             display: 'flex',
-  //             flexDirection: 'column',
-  //             alignItems: 'center',
-  //           }}
-  //         >
-  //           <Avatar sx={{ m: 1, bgcolor: '#ffa726' }}>
-  //             <LockOutlinedIcon />
-  //           </Avatar>
-  //           <Typography component="h1" variant="h5">
-  //             Sign in
-  //           </Typography>
-  //           <Stack component="form" width="100%" noValidate spacing={4} >
-  //             <FormControl fullWidth sx={{mt: 5}}>
-  //               <InputLabel htmlFor="outlined-adornment-amount">name</InputLabel>
-  //               <OutlinedInput
-  //                 id="user-name"
-  //                 label="name"
-  //                 name='name'
-  //                 value={user.username}
-  //                 onChange={onChangeUser}
-  //                 type="string"
-  //               />
-  //             </FormControl>
-  //             <FormControl fullWidth sx={{ m: 5 }}>
-  //               <InputLabel htmlFor="outlined-adornment-amount">email</InputLabel>
-  //               <OutlinedInput
-  //                 id="user-email"
-  //                 label="email"
-  //                 name="email"
-  //                 value={user.email}
-  //                 onChange={onChangeUser}
-  //                 type="string"
-  //               />
-  //             </FormControl>
-  //             <FormControl fullWidth sx={{ m: 5 }}>
-  //               <InputLabel htmlFor="outlined-adornment-amount">password</InputLabel>
-  //               <OutlinedInput
-  //                 id="user-password"
-  //                 autoComplete='true'
-  //                 label="password"
-  //                 name="password"
-  //                 value={user.password}
-  //                 onChange={onChangeUser}
-  //                 type="password"
-  //               />
-  //             </FormControl>
-  //             <FormControl fullWidth sx={{ m: 5 }}>
-  //               <InputLabel htmlFor="outlined-adornment-amount">confirmation</InputLabel>
-  //               <OutlinedInput
-  //                 id="user-passwordConfirmation"
-  //                 autoComplete='true'
-  //                 label="passwordConfirmation"
-  //                 name="passwordConfirmation"
-  //                 value={user.passwordConfirmation}
-  //                 onChange={onChangeUser}
-  //                 type="password"
-  //               />
-  //             </FormControl>
-  //             <Button
-  //               type="submit"
-  //               fullWidth
-  //               variant="contained"
-  //               sx={{ mt: 3, mb: 2 }}
-  //               onClick={sendFormData} 
-  //             >
-  //               sign In
-  //             </Button>
-  //           </Stack>
-  //         </Box>
-  //         <Copyright sx={{ mt: 8, mb: 4 }} />
-  //       </Container>
-  //    </>
-  // )
-};
+    try {
+      const res = await signIn(params)
+      console.log(res)
+
+      if (res.status === 200) {
+        // ログインに成功した場合はCookieに各値を格納
+        Cookies.set("_access_token", res.headers["access-token"])
+        Cookies.set("_client", res.headers["client"])
+        Cookies.set("_uid", res.headers["uid"])
+
+        setIsSignedIn(true)
+        setCurrentUser(res.data.data)
+
+        history.push("/users")
+
+        console.log("Signed in successfully!")
+      } else {
+        setAlertMessageOpen(true)
+      }
+    } catch (err) {
+      console.log(err)
+      setAlertMessageOpen(true)
+    }
+  }
+
+  return (
+    <>
+      <form noValidate autoComplete="off">
+        <Card >
+          <CardHeader title="Sign In" />
+          <CardContent>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              label="Email"
+              value={email}
+              margin="dense"
+              onChange={e => setEmail(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              label="Password"
+              type="password"
+              placeholder="At least 6 characters"
+              value={password}
+              margin="dense"
+              autoComplete="current-password"
+              onChange={e => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              fullWidth
+              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せない
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+            <Box textAlign="center">
+              <Typography variant="body2">
+                Don't have an account? &nbsp;
+                <Link to="/signup">
+                  Sign Up now!
+                </Link>
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+      </form>
+      <AlertMessage // エラーが発生した場合はアラートを表示
+        open={alertMessageOpen}
+        setOpen={setAlertMessageOpen}
+        severity="error"
+        message="Invalid emai or password"
+      />
+    </>
+  )
+}
