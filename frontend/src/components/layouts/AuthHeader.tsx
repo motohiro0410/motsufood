@@ -45,7 +45,7 @@ export const AuthHeader: React.FC = () => {
             // className={classes.linkBtn}
             onClick={handleSignOut}
           >
-            Sign out
+            サインアウト
           </Button>
         )
       } else {
@@ -57,7 +57,7 @@ export const AuthHeader: React.FC = () => {
               color="inherit"
               // className={classes.linkBtn}
             >
-              Sign in
+              サインイン
             </Button>
             <Button
               component={Link}
@@ -65,7 +65,7 @@ export const AuthHeader: React.FC = () => {
               color="inherit"
               // className={classes.linkBtn}
             >
-              Sign Up
+              サインアップ
             </Button>
           </>
         )

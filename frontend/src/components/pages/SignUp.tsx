@@ -61,13 +61,13 @@ export const SignUp: React.FC = () => {
     <>
       <form noValidate autoComplete="off">
         <Card >
-          <CardHeader title="Sign Up" />
+          <CardHeader title="サインアップ" />
           <CardContent>
             <TextField
               variant="outlined"
               required
               fullWidth
-              label="Name"
+              label="名前"
               value={name}
               margin="dense"
               onChange={e => setName(e.target.value)}
@@ -76,7 +76,7 @@ export const SignUp: React.FC = () => {
               variant="outlined"
               required
               fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
               onChange={e => setEmail(e.target.value)}
@@ -85,7 +85,7 @@ export const SignUp: React.FC = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
               value={password}
               margin="dense"
@@ -96,7 +96,7 @@ export const SignUp: React.FC = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password Confirmation"
+              label="パスワード(確認用)"
               type="password"
               value={passwordConfirmation}
               margin="dense"
@@ -111,7 +111,7 @@ export const SignUp: React.FC = () => {
               disabled={!name || !email || !password || !passwordConfirmation ? true : false} // 空欄があった場合はボタンを押せない
               onClick={handleSubmit}
             >
-              Submit
+              送信
             </Button>
           </CardContent>
         </Card>
@@ -120,7 +120,7 @@ export const SignUp: React.FC = () => {
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"
-        message="Invalid emai or password"
+        message="メールアドレスかパスワードが間違っています"
       />
     </>
   )

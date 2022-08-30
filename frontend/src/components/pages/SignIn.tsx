@@ -56,13 +56,13 @@ export const SignIn: React.FC = () => {
     <>
       <form noValidate autoComplete="off">
         <Card >
-          <CardHeader title="Sign In" />
+          <CardHeader title="サインイン" />
           <CardContent>
             <TextField
               variant="outlined"
               required
               fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
               onChange={e => setEmail(e.target.value)}
@@ -71,7 +71,7 @@ export const SignIn: React.FC = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
               placeholder="At least 6 characters"
               value={password}
@@ -87,14 +87,15 @@ export const SignIn: React.FC = () => {
               disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せない
               onClick={handleSubmit}
             >
-              Submit
+              送信
             </Button>
             <Box textAlign="center">
               <Typography variant="body2">
-                Don't have an account? &nbsp;
+                まだアカウントをお持ちでない方は
                 <Link to="/signup">
-                  Sign Up now!
+                  こちら
                 </Link>
+                  から作成してください
               </Typography>
             </Box>
           </CardContent>
@@ -104,7 +105,7 @@ export const SignIn: React.FC = () => {
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"
-        message="Invalid emai or password"
+        message="メールアドレスかパスワードが間違っています"
       />
     </>
   )
