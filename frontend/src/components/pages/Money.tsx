@@ -2,11 +2,11 @@ import { FC, memo, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
-import { Footer } from "../organisms/Footer";
-import { MainHeader } from "../organisms/MainHeader";
+import { Footer } from "../layouts/Footer";
+import { MainHeader } from "../layouts/MainHeader";
 import { Grid, Typography, Card } from "@mui/material";
 import { HeaderContext } from '../../providers/HeaderProvider';
-import { UserDetailModal } from "../organisms/UserDetailModal";
+import { UserDetailModal } from "../layouts/UserDetailModal";
 
 
 export const Money: FC = memo(() => {

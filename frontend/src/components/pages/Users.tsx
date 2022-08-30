@@ -1,14 +1,18 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useContext } from "react";
 
-import { GroupHeader } from "../organisms/GroupHeader";
-import { Footer } from "../organisms/Footer";
+import { GroupHeader } from "../layouts/GroupHeader";
+import { Footer } from "../layouts/Footer";
 import { Grid, Typography, Card, Stack, Avatar, CardContent, CircularProgress, Box, Button } from "@mui/material"
-import { UserDetailModal } from "../organisms/UserDetailModal";
+import { UserDetailModal } from "../layouts/UserDetailModal";
 import { useAllUsers } from "../../apis/useAllUsers";
 import { useEditUser } from "../../apis/useEditUser";
 import { useDleteUser } from "../../apis/useDeleteUser";
+import { AuthContext } from "../../router/Router";
 
 export const Users: FC = () => {
+
+  const { isSignedIn, currentUser } = useContext(AuthContext)
+
     // モーダルの開閉
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -30,29 +34,36 @@ export const Users: FC = () => {
         </Box>
       ) : (
         <>
-          <GroupHeader  handleOpen={handleOpen} />
-          <Grid container justifyContent="center" spacing={3} sx={{ mt: 20 }} wrap="wrap" >
-            {users.map((user) => (
-              <Grid item xs={3} sm={3} key={user.id}>
-                <Card sx={{ height: 150 }}>
-                  <Stack alignItems="center" direction="column">
-                    <Avatar sx={{mt: 2}}>H</Avatar>
-                    <CardContent>
-                      <Typography>
-                        {user.name}
-                      </Typography>
-                    </CardContent>
-                    </Stack>
-                    <Stack direction="row">
-                      <Button onClick={() => MoveEditPage(user.id)}>編集</Button>
-                      <Button onClick={() => deleteUser(user.id)}>削除</Button>
-                    </Stack>
-                </Card>
-              </Grid> 
-            ))}
-          </Grid>
-          <Footer />
-          <UserDetailModal open={open} handleClose={handleClose} />
+        {
+          isSignedIn && currentUser ? (
+            <>
+              <GroupHeader  handleOpen={handleOpen} />
+                <Grid container justifyContent="center" spacing={3} sx={{ mt: 20 }} wrap="wrap" >
+                  {users.map((user) => (
+                    <Grid item xs={3} sm={3} key={user.id}>
+                      <Card sx={{ height: 150 }}>
+                        <Stack alignItems="center" direction="column">
+                          <Avatar sx={{mt: 2}}>H</Avatar>
+                          <CardContent>
+                            <Typography>
+                              {user.name}
+                            </Typography>
+                          </CardContent>
+                          </Stack>
+                          <Stack direction="row">
+                            <Button onClick={() => MoveEditPage(user.id)}>編集</Button>
+                            <Button onClick={() => deleteUser(user.id)}>削除</Button>
+                          </Stack>
+                      </Card>
+                    </Grid> 
+                  ))}
+                </Grid>
+                <UserDetailModal open={open} handleClose={handleClose} />
+            </>
+          ) : (
+            <h1>Not signed in</h1>
+          )
+        }
         </>
       )}
     </>

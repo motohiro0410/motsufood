@@ -8,7 +8,7 @@ export const useUpdateUser = () => {
 
   const [user, setUser] = useState<User>({} as User)
 
-  const updateUser = (id: string) => {
+  const updateUser = (id: number) => {
     axios.get<User[]>(userUpdate(id))
       .then(res => {
         console.log(res.data)

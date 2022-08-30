@@ -8,19 +8,6 @@ import { User } from '../types/Types'
 
 export const useCreateUser = () => {
 
-  const [data, setData] = useState({});
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
-    // const newDate = e.target.value;
-    // console.log (newDate)
-    // setData(newDate);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // })
-  };
-
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<User>({} as User)
 
@@ -40,5 +27,5 @@ export const useCreateUser = () => {
       .finally(() => setLoading(false))
     }, []);
 
-    return { handleSubmit, createUser, setLoading, loading, user }
+    return { createUser, setLoading, loading, user }
 }

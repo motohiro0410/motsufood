@@ -4,7 +4,7 @@ import {RouteComponentProps} from 'react-router-dom'
 import { TextField, Button } from "@mui/material";
 import Box from '@mui/material/Box';
 import { HeaderContext } from '../../providers/HeaderProvider';
-import { MainHeader } from '../organisms/MainHeader';
+import { MainHeader } from '../layouts/MainHeader';
 import { useUpdateUser } from '../../apis/useUpdateUser'
 
 type PageProps = {} & RouteComponentProps<{id: string}>;
@@ -68,7 +68,7 @@ export const UserEdit: FC<PageProps> = ({match}) => {
                   type="submit"
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={()=>updateUser(match.params.id)}
+                  // onClick={()=>updateUser(match.params.id)}
                 >
                   更新
                 </Button>

@@ -13,10 +13,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import { Footer } from '../organisms/Footer';
-import { MainHeader } from "../organisms/MainHeader";
+import { Footer } from '../layouts/Footer';
+import { MainHeader } from "../layouts/MainHeader";
 import { HeaderContext } from '../../providers/HeaderProvider';
-import { UserDetailModal } from "../organisms/UserDetailModal";
+import { UserDetailModal } from "../layouts/UserDetailModal";
 
 
 export const InputFoodExpence: FC = memo(() => {

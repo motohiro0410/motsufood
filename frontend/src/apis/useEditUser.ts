@@ -9,7 +9,7 @@ export const useEditUser = () => {
 
   const history = useHistory();
 
-  const MoveEditPage = (id: string) => {
+  const MoveEditPage = (id: number) => {
     axios.get<User>(userEdit(id))
       .then(res => {
         history.push(`/users/${id}/edit`)

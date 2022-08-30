@@ -49,7 +49,7 @@ module Api
       private
         # passwordも追加予定
         def user_params
-          params.permit(:id, :name, :email, :password, :password_confirmation)
+          params.permit(:id, :username, :email, :password, :password_confirmation)
         end
     end
   end

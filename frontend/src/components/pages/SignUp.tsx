@@ -1,38 +1,43 @@
-import React, { useState, useContext } from "react"
-import { useHistory, Link } from "react-router-dom"
+import { useState, useContext } from "react"
+import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie"
 
-import { Typography, TextField, Card, CardContent, CardHeader, Button, Box } from "@mui/material"
+import { TextField, Card, CardContent, CardHeader, Button } from "@mui/material"
 
-import { AuthContext } from "../../router/Router"
+import { AuthContext } from "../../router/Router";
 import { AlertMessage } from "../layouts/AlertMessage"
-import { signIn } from "../../lib/api/auth"
-import { SignInParams } from "../../types/Types"
+import { signUp } from "../../lib/api/auth"
+import { SignUpParams } from "../../types/Types"
 
-// サインイン用ページ
-export const SignIn: React.FC = () => {
-  const history = useHistory()
+// サインアップ用ページ
+export const SignUp: React.FC = () => {
+  const histroy = useHistory()
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
 
+  const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState<string>("")
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false)
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
-    const params: SignInParams = {
+    const params: SignUpParams = {
+      name: name,
       email: email,
-      password: password
+      password: password,
+      passwordConfirmation: passwordConfirmation
     }
 
     try {
-      const res = await signIn(params)
+      const res = await signUp(params)
       console.log(res)
 
       if (res.status === 200) {
-        // ログインに成功した場合はCookieに各値を格納
+        // アカウント作成と同時にログインさせてしまう
+        // 本来であればメール確認などを挟むべき
         Cookies.set("_access_token", res.headers["access-token"])
         Cookies.set("_client", res.headers["client"])
         Cookies.set("_uid", res.headers["uid"])
@@ -40,7 +45,7 @@ export const SignIn: React.FC = () => {
         setIsSignedIn(true)
         setCurrentUser(res.data.data)
 
-        history.push("/users")
+        histroy.push("/users")
 
         console.log("Signed in successfully!")
       } else {
@@ -56,8 +61,17 @@ export const SignIn: React.FC = () => {
     <>
       <form noValidate autoComplete="off">
         <Card >
-          <CardHeader title="サインイン" />
+          <CardHeader title="サインアップ" />
           <CardContent>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              label="名前"
+              value={name}
+              margin="dense"
+              onChange={e => setName(e.target.value)}
+            />
             <TextField
               variant="outlined"
               required
@@ -73,31 +87,32 @@ export const SignIn: React.FC = () => {
               fullWidth
               label="パスワード"
               type="password"
-              placeholder="At least 6 characters"
               value={password}
               margin="dense"
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              label="パスワード(確認用)"
+              type="password"
+              value={passwordConfirmation}
+              margin="dense"
+              autoComplete="current-password"
+              onChange={e => setPasswordConfirmation(e.target.value)}
             />
             <Button
               type="submit"
               variant="contained"
               size="large"
               fullWidth
-              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せない
+              disabled={!name || !email || !password || !passwordConfirmation ? true : false} // 空欄があった場合はボタンを押せない
               onClick={handleSubmit}
             >
               送信
             </Button>
-            <Box textAlign="center">
-              <Typography variant="body2">
-                まだアカウントをお持ちでない方は
-                <Link to="/signup">
-                  こちら
-                </Link>
-                  から作成してください
-              </Typography>
-            </Box>
           </CardContent>
         </Card>
       </form>
