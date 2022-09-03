@@ -19,7 +19,7 @@ gem 'psych', '~> 3.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'devise_token_auth'
-gem 'omniauth', '>= 1.0.0'
+# gem 'omniauth', '>= 1.0.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
