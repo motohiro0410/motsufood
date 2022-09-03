@@ -1,13 +1,19 @@
-import React, { useContext } from "react"
+import React, { useContext, FC } from "react"
 import { useHistory, Link } from "react-router-dom"
 import Cookies from "js-cookie"
 
-import { Toolbar, AppBar, Button, IconButton } from '@mui/material';
+import { Toolbar, AppBar, Button, IconButton, Typography } from '@mui/material';
 
 import { signOut } from "../../lib/api/auth"
 import { AuthContext } from "../../router/Router";
 
-export const AuthHeader: React.FC = () => {
+type Context = {
+  title: string;
+}
+
+export const AuthHeader: FC<Context> = (props: any) => {
+  const { title } = props;
+
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext)
   const histroy = useHistory()
 
@@ -42,7 +48,7 @@ export const AuthHeader: React.FC = () => {
         return (
           <Button
             color="inherit"
-            // className={classes.linkBtn}
+            size="small"
             onClick={handleSignOut}
           >
             サインアウト
@@ -55,17 +61,9 @@ export const AuthHeader: React.FC = () => {
               component={Link}
               to="/signin"
               color="inherit"
-              // className={classes.linkBtn}
+              size="small"
             >
               サインイン
-            </Button>
-            <Button
-              component={Link}
-              to="/signup"
-              color="inherit"
-              // className={classes.linkBtn}
-            >
-              サインアップ
             </Button>
           </>
         )
@@ -79,12 +77,10 @@ export const AuthHeader: React.FC = () => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-          >
-          </IconButton>
-          <AuthButtons />
+        <Typography textAlign="center" variant="h6"  >
+            {title}
+          </Typography>
+            <AuthButtons />
         </Toolbar>
       </AppBar>
     </>

@@ -1,18 +1,18 @@
 import { FC, memo, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
 
 
 import { Footer } from "../layouts/Footer";
-import { MainHeader } from "../layouts/MainHeader";
+import { AuthHeader } from "../layouts/AuthHeader";
 import { Grid, Typography, Card } from "@mui/material";
 import { HeaderContext } from '../../providers/HeaderProvider';
-import { UserDetailModal } from "../layouts/UserDetailModal";
-
+import { InputExpenceModal } from "../layouts/InputExpenceModal";
+import { AuthContext } from "../../router/Router";
 
 export const Money: FC = memo(() => {
+  
   const contexts = useContext(HeaderContext);
 
-  // const userId = useParams<number>();
+  const { isSignedIn, currentUser } = useContext(AuthContext)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -22,7 +22,9 @@ export const Money: FC = memo(() => {
 
   return (
     <>
-      <MainHeader title={contexts[2].title} handleOpen={handleOpen} />
+      {isSignedIn && currentUser ? (
+        <>
+      <AuthHeader title={contexts[2].title} />
         <Grid container direction="column" alignItems="center" mt={20}>
           <Grid item mb={5}>
             <Typography variant="h4">
@@ -68,11 +70,13 @@ export const Money: FC = memo(() => {
             </Grid>
           </Grid>
         </Grid>
-
-      <UserDetailModal open={open} handleClose={handleClose} />
-
+      <InputExpenceModal open={open} handleClose={handleClose} />
       <Footer />
+      </>
+      ) : (
+        <h1>Not signed in</h1>
+      )
+      }
     </>
-    
   )
 })
