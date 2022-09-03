@@ -12,7 +12,9 @@ export const HeaderProvider = (props: any) => {
     {title: "ホーム"},
     {title: "食費入力"},
     {title: "支払い"}, 
-    {title: "ユーザー編集"},
+    {title: "ユーザー一覧"},
+    {title: "新規登録"},
+    {title: "ログイン"},
   ]
 
   

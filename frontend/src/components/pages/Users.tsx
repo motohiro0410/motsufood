@@ -8,8 +8,12 @@ import { useAllUsers } from "../../apis/useAllUsers";
 import { useEditUser } from "../../apis/useEditUser";
 import { useDleteUser } from "../../apis/useDeleteUser";
 import { AuthContext } from "../../router/Router";
+import { AuthHeader } from "../layouts/AuthHeader"
+import { HeaderContext } from '../../providers/HeaderProvider';
 
 export const Users: FC = () => {
+
+  const contexts = useContext(HeaderContext);
 
   const { isSignedIn, currentUser } = useContext(AuthContext)
 
@@ -37,7 +41,8 @@ export const Users: FC = () => {
         {
           isSignedIn && currentUser ? (
             <>
-              <GroupHeader  handleOpen={handleOpen} />
+              <AuthHeader title={contexts[3].title} />
+              {/* <GroupHeader  handleOpen={handleOpen} /> */}
                 <Grid container justifyContent="center" spacing={3} sx={{ mt: 20 }} wrap="wrap" >
                   {users.map((user) => (
                     <Grid item xs={3} sm={3} key={user.id}>
@@ -58,6 +63,7 @@ export const Users: FC = () => {
                     </Grid> 
                   ))}
                 </Grid>
+                <Footer />
                 <UserDetailModal open={open} handleClose={handleClose} />
             </>
           ) : (

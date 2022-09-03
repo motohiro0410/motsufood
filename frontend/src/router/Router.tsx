@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, createContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Count } from "../components/pages/Count";
 import { Money } from "../components/pages/Money";
@@ -9,8 +9,7 @@ import { Page404 } from "../components/pages/Page404";
 import { UserEdit } from "../components/pages/UserEdit"
 import { InputFoodExpence } from "../components/pages/InputFoodExpence"
 import { SignUp } from "../components/pages/SignUp";
-import { Redirect } from "react-router-dom"
-import { CommonLayout } from "../components/layouts/CommonLayout";
+import { AuthCommonLayout } from "../components/layouts/AuthCommonLayout";
 import { getCurrentUser } from "../lib/api/auth";
 import { User } from "../types/Types";
 
@@ -37,19 +36,17 @@ export const Router: FC = () => {
   const handleGetCurrentUser = async () => {
     try {
       const res = await getCurrentUser()
-
       if (res?.data.isLogin === true) {
         setIsSignedIn(true)
         setCurrentUser(res?.data.data)
 
-        console.log(res?.data.data)
+        console.log(res?.data)
       } else {
         console.log("No current user")
       }
     } catch (err) {
       console.log(err)
     }
-
     setLoading(false)
   }
 
@@ -60,12 +57,12 @@ export const Router: FC = () => {
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
-  const Private = ({ children }: { children: React.ReactElement }) => {
+  const Private = ({ children } : { children: React.ReactElement }) => {
     if (!loading) {
       if (isSignedIn) {
         return children
       } else {
-        return <Redirect to="/signin" />
+        return  <Redirect to="/signin" />
       }
     } else {
       return <></>
@@ -74,27 +71,25 @@ export const Router: FC = () => {
 
   return (
     <Switch>
-      <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser}}>
-        <CommonLayout>
-          <Switch>
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/signin" component={SignIn} />
+        <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser}}>
+            <Switch>
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/signin" component={SignIn} />
+            </Switch>
             <Private>
             <Route path="/users"
               render={({match})=>(
                  <Switch>
                    <Route exact path="/users" component={Users} />
                    <Route path="/users/:id/edit" component={UserEdit} />
-                   <Route path="/users/:userId/count" component={Count} />
-                   <Route path="/users/:userId/money" component={Money} />
-                   <Route path="/users/:userId/input" component={InputFoodExpence} />
+                   <Route path="/users/count" component={Count} />
+                   <Route path="/users/money" component={Money} />
+                   <Route path="/users/input" component={InputFoodExpence} />
                   </Switch>
                )}
              />
             </Private>
-          </Switch>
-        </CommonLayout>
-      </AuthContext.Provider>
+        </AuthContext.Provider>
       <Route path="*">
         <Page404 />
       </Route>

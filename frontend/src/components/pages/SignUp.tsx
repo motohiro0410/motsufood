@@ -2,15 +2,19 @@ import { useState, useContext } from "react"
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie"
 
-import { TextField, Card, CardContent, CardHeader, Button } from "@mui/material"
+import { TextField, Grid, CardHeader, Button } from "@mui/material"
 
 import { AuthContext } from "../../router/Router";
 import { AlertMessage } from "../layouts/AlertMessage"
 import { signUp } from "../../lib/api/auth"
 import { SignUpParams } from "../../types/Types"
+import { AuthHeader } from "../layouts/AuthHeader";
+import { HeaderContext } from '../../providers/HeaderProvider';
 
 // サインアップ用ページ
 export const SignUp: React.FC = () => {
+  const contexts = useContext(HeaderContext);
+
   const histroy = useHistory()
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
@@ -59,10 +63,11 @@ export const SignUp: React.FC = () => {
 
   return (
     <>
+      <AuthHeader title={contexts[4].title} />
       <form noValidate autoComplete="off">
-        <Card >
-          <CardHeader title="サインアップ" />
-          <CardContent>
+        <Grid container spacing={{ xs: 10 }}>
+          <Grid item>
+          <CardHeader  title="サインアップ" />
             <TextField
               variant="outlined"
               required
@@ -113,8 +118,8 @@ export const SignUp: React.FC = () => {
             >
               送信
             </Button>
-          </CardContent>
-        </Card>
+            </Grid>
+          </Grid>
       </form>
       <AlertMessage // エラーが発生した場合はアラートを表示
         open={alertMessageOpen}

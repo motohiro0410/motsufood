@@ -2,7 +2,7 @@ import { FC, memo, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Footer } from "../layouts/Footer";
-import { MainHeader } from "../layouts/MainHeader";
+import { AuthHeader } from "../layouts/AuthHeader";
 import { UserDetailModal } from "../layouts/UserDetailModal";
 
 import Grid from '@mui/material/Grid';
@@ -26,7 +26,7 @@ export const Count: FC = memo(() => {
 
   return (
     <>
-      <MainHeader title={contexts[0].title} handleOpen={handleOpen}/>
+      <AuthHeader title={contexts[0].title}/>
         <Grid  alignItems="center" sx={{ mt: 30, ml: 20 }} >
           <Grid item>
             <Button variant="contained" sx={{ bgcolor: '#81da7f', color: "white", fontSize: '30px', width: 200, height: 150 }} >
